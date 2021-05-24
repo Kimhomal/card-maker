@@ -1,8 +1,23 @@
 import './app.css';
+import React from 'react';
+import SignIn from './components/user/signin';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Maker from './components/maker/maker';
 
-function App() {
+function App({ authService }) {
   return (
-    <h1>hello :)</h1>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/">
+          <SignIn authService={authService}></SignIn>
+        </Route>
+      </Switch>
+      <Switch>
+        <Route exact path="/maker">
+          <Maker></Maker>
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
 }
 
