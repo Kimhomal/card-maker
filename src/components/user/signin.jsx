@@ -10,12 +10,14 @@ import {
   makeStyles,
   Typography,
 } from '@material-ui/core';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router';
+import Footer from '../footer/footer';
+import Header from '../header/header';
 
 const useStyles = makeStyles((theme) => ({
   wrap: {
-    marginTop: theme.spacing(8),
+    // marginTop: theme.spacing(8),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -62,16 +64,23 @@ const SignIn = ({ authService }) => {
     });
   };
 
+  useEffect(() => {
+    authService.onAuthChange((user) => {
+      user && goToMaker(user.uid);
+    });
+  });
+
   return (
     <Container maxWidth="xs">
+      <Header></Header>
       <CssBaseline />
       <div className={classes.wrap}>
-        <Box className={classes.header}>
+        {/* <Box className={classes.header}>
           <img className={classes.avatar} alt="logo" src="/images/logo.png" />
           <Typography component="h1" variant="h4">
             Business Card Maker
           </Typography>
-        </Box>
+        </Box> */}
         <Box className={classes.content}>
           <Typography component="h1" variant="h5">
             Login
@@ -102,6 +111,7 @@ const SignIn = ({ authService }) => {
           </List>
         </Box>
       </div>
+      <Footer></Footer>
     </Container>
   );
 };

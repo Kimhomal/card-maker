@@ -1,4 +1,4 @@
-import './app.css';
+import './app.module.css';
 import React from 'react';
 import SignIn from './components/user/signin';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
@@ -14,7 +14,7 @@ function App({ authService }) {
       </Switch>
       <Switch>
         <Route exact path="/maker">
-          <Maker></Maker>
+          <Maker authService={authService}></Maker>
         </Route>
       </Switch>
     </BrowserRouter>

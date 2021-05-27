@@ -1,0 +1,19 @@
+@value makerLightGrey from '../../common/colors.css';
+
+.preview {
+  flex: 1;
+  background-color: makerLightGrey;
+}
+
+.title {
+  text-align: center;
+}
+
+.cards {
+  width: 100%;
+  height: 100%;
+  padding: 0.5em 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
