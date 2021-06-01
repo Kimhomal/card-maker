@@ -4,6 +4,7 @@
   flex: 1;
   border-right: 1px solid makerLightGrey;
   padding: 0.5em 2em;
+  overflow-y: auto;
 }
 
 .title {

@@ -16,7 +16,7 @@ const CardEditForm = ({ FileInput, card, updateCard, deleteCard }) => {
     updateCard({
       ...card,
       fileName: file.name,
-      url: file.url,
+      fileURL: file.url,
     });
   };
 

@@ -1,10 +1,10 @@
-import "./app.module.css";
-import React from "react";
-import SignIn from "./components/user/signin";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Maker from "./components/maker/maker";
+import './app.module.css';
+import React from 'react';
+import SignIn from './components/user/signin';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Maker from './components/maker/maker';
 
-function App({ FileInput, authService }) {
+function App({ FileInput, cardRepository, authService }) {
   return (
     <BrowserRouter>
       <Switch>
@@ -14,7 +14,11 @@ function App({ FileInput, authService }) {
       </Switch>
       <Switch>
         <Route exact path="/maker">
-          <Maker FileInput={FileInput} authService={authService}></Maker>
+          <Maker
+            FileInput={FileInput}
+            cardRepository={cardRepository}
+            authService={authService}
+          ></Maker>
         </Route>
       </Switch>
     </BrowserRouter>

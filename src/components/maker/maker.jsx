@@ -1,4 +1,3 @@
-import { makeStyles } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import Editor from '../editor/editor';
@@ -7,62 +6,79 @@ import Header from '../header/header';
 import Preview from '../preview/preview';
 import styles from './maker.module.css';
 
-const Maker = ({ FileInput, authService }) => {
+const Maker = ({ FileInput, cardRepository, authService }) => {
   const [cards, setCards] = useState({
-    1: {
-      id: '1',
-      name: 'Hochul',
-      company: 'Anonymous',
-      theme: 'light',
-      title: 'title',
-      email: 'email',
-      message: 'message',
-      fileName: 'file_name',
-      fileURL: null,
-    },
-    2: {
-      id: '2',
-      name: 'Hochul',
-      company: 'Anonymous',
-      theme: 'colorful',
-      title: 'title',
-      email: 'email',
-      message: 'message',
-      fileName: 'file_name',
-      fileURL: null,
-    },
-    3: {
-      id: '3',
-      name: 'Hochul',
-      company: 'Anonymous',
-      theme: 'dark',
-      title: 'title',
-      email: 'email',
-      message: 'message',
-      fileName: 'file_name',
-      fileURL: null,
-    },
-    4: {
-      id: '4',
-      name: 'Hochul',
-      company: 'Anonymous',
-      theme: 'light',
-      title: 'title',
-      email: 'email',
-      message: 'message',
-      fileName: 'file_name',
-      fileURL: null,
-    },
+    // 1: {
+    //   id: '1',
+    //   name: 'Hochul',
+    //   company: 'Anonymous',
+    //   theme: 'light',
+    //   title: 'title',
+    //   email: 'email',
+    //   message: 'message',
+    //   fileName: 'file_name',
+    //   fileURL: null,
+    // },
+    // 2: {
+    //   id: '2',
+    //   name: 'Hochul',
+    //   company: 'Anonymous',
+    //   theme: 'colorful',
+    //   title: 'title',
+    //   email: 'email',
+    //   message: 'message',
+    //   fileName: 'file_name',
+    //   fileURL: null,
+    // },
+    // 3: {
+    //   id: '3',
+    //   name: 'Hochul',
+    //   company: 'Anonymous',
+    //   theme: 'dark',
+    //   title: 'title',
+    //   email: 'email',
+    //   message: 'message',
+    //   fileName: 'file_name',
+    //   fileURL: null,
+    // },
+    // 4: {
+    //   id: '4',
+    //   name: 'Hochul',
+    //   company: 'Anonymous',
+    //   theme: 'light',
+    //   title: 'title',
+    //   email: 'email',
+    //   message: 'message',
+    //   fileName: 'file_name',
+    //   fileURL: null,
+    // },
   });
   const history = useHistory();
+  const [userId, setUserId] = useState(history.state && history.state.id);
 
   const onLogout = () => {
     authService.logout();
   };
 
+  // database event
+  useEffect(() => {
+    if (!userId) {
+      return;
+    }
+
+    const stopSync = cardRepository.syncCards(userId, (cards) => {
+      setCards(cards);
+    });
+
+    return () => stopSync();
+  }, [userId, cardRepository]);
+
+  // login event
   useEffect(() => {
     authService.onAuthChange((user) => {
-      if (!user) {
+      if (user) {
+        setUserId(user.uid);
+      } else {
         history.push('/');
       }
     });
@@ -74,6 +90,8 @@ const Maker = ({ FileInput, authService }) => {
       updated[card.id] = card;
       return updated;
     });
+
+    cardRepository.saveCard(userId, card);
   };
 
   const deleteCard = (card) => {
@@ -82,6 +100,8 @@ const Maker = ({ FileInput, authService }) => {
       delete updated[card.id];
       return updated;
     });
+
+    cardRepository.removeCard(userId, card);
   };
 
   return (

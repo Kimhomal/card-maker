@@ -55,9 +55,9 @@ const SignIn = ({ authService }) => {
 
   const onLogin = (name) => {
     authService.login(name).then((result) => {
-      const credential = result.credential;
+      // const credential = result.credential;
 
-      const token = credential.accessToken;
+      // const token = credential.accessToken;
       const user = result.user;
 
       goToMaker(user.uid);
