@@ -7,52 +7,7 @@ import Preview from '../preview/preview';
 import styles from './maker.module.css';
 
 const Maker = ({ FileInput, cardRepository, authService }) => {
-  const [cards, setCards] = useState({
-    // 1: {
-    //   id: '1',
-    //   name: 'Hochul',
-    //   company: 'Anonymous',
-    //   theme: 'light',
-    //   title: 'title',
-    //   email: 'email',
-    //   message: 'message',
-    //   fileName: 'file_name',
-    //   fileURL: null,
-    // },
-    // 2: {
-    //   id: '2',
-    //   name: 'Hochul',
-    //   company: 'Anonymous',
-    //   theme: 'colorful',
-    //   title: 'title',
-    //   email: 'email',
-    //   message: 'message',
-    //   fileName: 'file_name',
-    //   fileURL: null,
-    // },
-    // 3: {
-    //   id: '3',
-    //   name: 'Hochul',
-    //   company: 'Anonymous',
-    //   theme: 'dark',
-    //   title: 'title',
-    //   email: 'email',
-    //   message: 'message',
-    //   fileName: 'file_name',
-    //   fileURL: null,
-    // },
-    // 4: {
-    //   id: '4',
-    //   name: 'Hochul',
-    //   company: 'Anonymous',
-    //   theme: 'light',
-    //   title: 'title',
-    //   email: 'email',
-    //   message: 'message',
-    //   fileName: 'file_name',
-    //   fileURL: null,
-    // },
-  });
+  const [cards, setCards] = useState({});
   const history = useHistory();
   const [userId, setUserId] = useState(history.state && history.state.id);
 
@@ -82,7 +37,7 @@ const Maker = ({ FileInput, cardRepository, authService }) => {
         history.push('/');
       }
     });
-  });
+  }, [authService, history]);
 
   const createOrUpdateCard = (card) => {
     setCards((cards) => {

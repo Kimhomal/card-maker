@@ -7,12 +7,16 @@ const firebaseConfig = {
   authDomain: `${process.env.REACT_APP_FIREBASE_PROJECT_ID}.firebaseapp.com`,
   databaseURL: `${process.env.REACT_APP_FIREBASE_DATABASE_URL}`,
   projectId: `${process.env.REACT_APP_FIREBASE_PROJECT_ID}`,
-  storageBucket: `${process.env.REACT_APP_FIREBASE_PROJECT_ID}.appspot.com`,
-  messagingSenderId: `${process.env.REACT_APP_FIREBASE_SENDER_ID}`,
+  // storageBucket: `${process.env.REACT_APP_FIREBASE_PROJECT_ID}.appspot.com`,
+  // messagingSenderId: `${process.env.REACT_APP_FIREBASE_SENDER_ID}`,
   appId: `${process.env.REACT_APP_FIREBASE_APP_ID}`,
   measurementId: `${process.env.REACT_APP_FIREBASE_MEASUREMENT_ID}`,
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-export default firebase;
+export const firebaseApp = firebase;
+export const firebaseAuth = firebase.auth();
+export const firebaseDatabase = firebase.database();
+export const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+export const githubAuthProvider = new firebase.auth.GithubAuthProvider();
